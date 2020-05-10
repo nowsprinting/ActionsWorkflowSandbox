@@ -10,14 +10,15 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - name: is stable
-      id: is_stable
+
+    - name: Check stable
+      id: check_stable
       run: |
         if [[ ${{ github.event.ref }} =~ ^refs/tags/v[0-9]+(\.[0-9]+)+$ ]]; then
           echo ::set-output name=is_stable::true
         fi
 
-    - name: Stable version
+    - name: Stable version only step
       run: echo This tag is be stable version!
       if steps.check_stable.outputs.is_stable == 'true'
 
