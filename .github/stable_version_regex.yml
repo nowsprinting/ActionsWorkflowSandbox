@@ -1,0 +1,15 @@
+name: stable_version_regex
+
+on:
+  push:
+    tags: 
+      - 'v*'
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Stable version
+      run: echo This tag is be stable version!
+      if: endsWith(github.ref, 'refs/tags/v[0-9]+\.[0-9+]\.?[0-9]*')
