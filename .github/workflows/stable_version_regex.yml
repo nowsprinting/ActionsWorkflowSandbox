@@ -21,4 +21,3 @@ jobs:
       run: echo This tag is be stable version!
       if steps.check_stable.outputs.is_stable == 'true'
 
-# refs: https://stackoverflow.com/questions/58862864/github-actions-ci-conditional-regex
