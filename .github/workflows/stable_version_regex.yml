@@ -10,6 +10,15 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+    - name: is stable
+      id: is_stable
+      run: |
+        if [[ ${{ github.event.ref }} =~ ^refs/tags/v[0-9]+(\.[0-9]+)+$ ]]; then
+          echo ::set-output name=is_stable::true
+        fi
+
     - name: Stable version
       run: echo This tag is be stable version!
-      if: endsWith(github.ref, 'refs/tags/v[0-9]+\.[0-9]+\.?[0-9]*')
+      if steps.check_stable.outputs.is_stable == 'true'
+
+# refs: https://stackoverflow.com/questions/58862864/github-actions-ci-conditional-regex
