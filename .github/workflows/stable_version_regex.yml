@@ -10,12 +10,14 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - name: Check stable
-      id: check_stable
+    - name: Check semantic version format in tag
+      id: semver
       run: |
         if [[ ${{ github.ref }} =~ ^refs/tags/v[0-9]+(\.[0-9]+)+$ ]]; then
           echo ::set-output name=is_stable::true
         fi
+
     - name: Stable version only step
-      run: echo This tag is be stable version!
-      if steps.check_stable.outputs.is_stable == 'true'
+      run: |
+        echo This tag is be stable version
+      if: steps.semver.outputs.is_stable == 'true'
